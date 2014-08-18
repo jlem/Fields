@@ -27,6 +27,9 @@ class FieldsServiceProvider extends ServiceProvider {
         \Str::macro('spaceCase', function($string) {
             return ucwords(str_replace('_', ' ', \snake_case($string)));
         });
+
+        \App::bind('Jlem\Fields\Arguments\LabelTranslator', \Config::get('fields::config.label_translator'));
+        \App::bind('Jlem\Fields\Arguments\ArgumentMerger', \Config::get('fields::config.argument_merger'));
 	}
 
 	/**

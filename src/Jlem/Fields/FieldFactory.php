@@ -1,6 +1,6 @@
 <?php namespace Jlem\Fields;
 
-use Jlem\Fields\ArgumentBuilder;
+use Jlem\Fields\Arguments\ArgumentBuilder;
 
 class FieldFactory
 {
@@ -11,12 +11,32 @@ class FieldFactory
         $this->ArgumentBuilder = $ArgumentBuilder;
     }
 
+
+    /**
+     * Makes a new field
+     *
+     * @param string $label
+     * @param string $type
+     * @param array $args
+     * @access public
+     * @return Jlem\Fields\Fields\Field
+    */
+
     public function make($label, $type, $args)
     {
         $args = $this->ArgumentBuilder->makeArguments($label, $args);
         $fieldName = $this->fullName($type);
         return new $fieldName($args);
     }
+
+
+    /**
+     * Applies the given type to the full namespace
+     *
+     * @param string $type
+     * @access protected
+     * @return string
+    */
 
     protected function fullName($type)
     {
